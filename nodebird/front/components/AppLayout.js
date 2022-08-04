@@ -1,14 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { Input, Menu, Button, Row, Col, Card, Avatar } from 'antd';
+import LoginForm from './LoginForm';
+import { Input, Menu, Row, Col, Card, Avatar } from 'antd';
 
 // 아직 서버로부터 받을 데이터가 없어서 받을 데이터 예상해서 가짜로 데이터 만들기
 const dummy = {
   nickname: '호야',
-  Post:[],
+  Post: [],
   Followings: [],
   Followers: [],
+  isLoggedIn: false,
 };
 
 const AppLayout = ({ children }) => {
@@ -21,7 +23,6 @@ const AppLayout = ({ children }) => {
           <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
         </Menu.Item>
       </Menu>
-      <Link href="/signup"><a><Button>회원가입</Button></a></Link>
 
       {/* 전체화면이 24 
       12면 절반 차지 
@@ -30,19 +31,24 @@ const AppLayout = ({ children }) => {
       => 자동으로 반응형 됨*/}
       <Row>
         <Col xs={24} md={6}>
-          <Card
-            actions={[
-              <div key="twit">짹짹<br/>{dummy.Post.length}</div>,
-              <div key="following">팔로잉<br/>{dummy.Followings.length}</div>,
-              <div key="follower">팔로워<br/>{dummy.Followers.length}</div>
-            ]}>
-            <Card.Meta
-              avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
-              title={dummy.nickname}
-              
+          {/* 로그인 되어있으면 */}
+          {dummy.isLoggedIn
+            ? <Card
+              actions={[
+                <div key="twit">짹짹<br />{dummy.Post.length}</div>,
+                <div key="following">팔로잉<br />{dummy.Followings.length}</div>,
+                <div key="follower">팔로워<br />{dummy.Followers.length}</div>
+              ]}>
+              <Card.Meta
+                avatar={<Avatar>{dummy.nickname[0]}</Avatar>}
+                title={dummy.nickname}
               />
 
-          </Card>
+            </Card>
+            :
+            // 로그인 안되어있으면
+            <LoginForm />
+          }
         </Col>
         <Col xs={24} md={12}>두번째</Col>
         {children}
