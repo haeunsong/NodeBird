@@ -19,7 +19,7 @@ const LoginForm = () => {
   
   return (
     <div>
-      <Form onFinish={onFinishForm}>
+      <Form onFinish={onFinishForm} style={{padding: '10px'}}>
               <div>
                 <label htmlFor='user-id'>아이디</label>
                 <br />

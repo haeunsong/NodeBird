@@ -23,13 +23,12 @@ const AppLayout = ({ children }) => {
           <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
         </Menu.Item>
       </Menu>
-
       {/* 전체화면이 24 
       12면 절반 차지 
       xs - 모바일 (작은화면에선 한줄 다 차지하게)
       md - 데스크탑 
       => 자동으로 반응형 됨*/}
-      <Row>
+      <Row gutter={8}>
         <Col xs={24} md={6}>
           {/* 로그인 되어있으면 */}
           {dummy.isLoggedIn
@@ -50,10 +49,11 @@ const AppLayout = ({ children }) => {
             <LoginForm />
           }
         </Col>
-        <Col xs={24} md={12}>두번째</Col>
-        {children}
 
-        <Col xs={24} md={6}>세번ㅉ</Col>
+        <Col xs={24} md={12}>{children}</Col>
+        
+
+        <Col xs={24} md={6}>세번째</Col>
       </Row>
 
 
